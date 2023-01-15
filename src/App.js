@@ -1,5 +1,6 @@
 import "./styles.css";
 import React, { useState } from "react";
+import { ReactComponent as Img } from "./public/avatar.svg";
 
 export default function App() {
   const [list, setList] = useState([]);
@@ -21,6 +22,11 @@ export default function App() {
     Burger: "2",
     Pizza: "2"
   };
+  const wholeList = {
+    ...vegList,
+    ...nonVegList,
+    ...chineseList
+  };
   function handleVeg(event) {
     var vegListItems = Object.keys(vegList);
     setList(vegListItems);
@@ -37,17 +43,30 @@ export default function App() {
     if (index % 2 === 0) {
       return "grey";
     }
-    return "white";
+    return "pink";
+  }
+  function getdesccolor(x) {
+    if (x >= 4) {
+      return "green";
+    }
+    return "red";
   }
   return (
     <div className="App">
-      <h1>Good Food </h1>
+      <div className="avatar">
+        <Img />
+      </div>
+      {/* <Img /> */}
+      <h2 style={{ display: "flex", marginTop: "60px", marginLeft: "80px" }}>
+        Food Recommendations by Anshu
+      </h2>
+      <span>Select your category: 👉 </span>
       <button onClick={handleVeg}>Veg</button>
       <button onClick={handleNonVeg}>Non Veg</button>
       <button onClick={handleChinese}>Chinese</button>
       <hr></hr>
       <div>
-        <ul>
+        <ol>
           {list.map(function (item, index) {
             return (
               <div>
@@ -59,12 +78,22 @@ export default function App() {
                     backgroundColor: getbg(index)
                   }}
                 >
-                  {item} ()
+                  {item} ( Ratings : {wholeList[item]}/5 )
+                  <div
+                    id="fooddesc"
+                    style={{ backgroundColor: getdesccolor(wholeList[item]) }}
+                  >
+                    {" "}
+                    Food Description:{" "}
+                    {wholeList[item] >= "4"
+                      ? "This item is good for health"
+                      : "This item is not good for your health"}
+                  </div>
                 </li>
               </div>
             );
           })}
-        </ul>
+        </ol>
       </div>
     </div>
   );

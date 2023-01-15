@@ -6,3 +6,18 @@ button {
   padding: 5px;
   margin: 10px;
 }
+.avatar {
+  width: 60%;
+  display: flex;
+  margin-top: -160px;
+  margin-bottom: -160px;
+  content: center;
+  margin-left: 110px;
+}
+#fooddesc {
+  /* background-color: coral; */
+  margin: 1rem;
+  margin-left: 7rem;
+  padding: 1rem;
+  width: 50%;
+}
